@@ -1,24 +1,16 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Card, Col, Container, Form, FloatingLabel, Row } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { useAuth } from '../../contexts';
 import routes from '../../routes';
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem('user');
-    if (token) {
-      useAuth.loggedIn = true;
-    }
-    useAuth.loggedIn = false;
-    navigate('/login');
-  }, []);
+  const [authFailed, setAuthFailed] = useState(false);
+  const { logIn } = useAuth();
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().trim().required('Обязательное поле'),
@@ -33,16 +25,19 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       try {
         const { data } = await axios.post(routes.login, values);
-        localStorage.setItem('user', JSON.stringify(data.token));
-        navigate('/');
+        logIn();
+        localStorage.setItem('token', JSON.stringify(data.token));
+        setAuthFailed(false);
+        redirect('/');
       } catch (error) {
-        formik.errors = error;
+        formik.setSubmitting(false);
+        setAuthFailed(true);
+        redirect('login');
       }
     },
     validationSchema,
   });
 
-  console.log(formik);
   return (
     <Container fluid className='h-100'>
       <Row className='justify-content-center align-items-center h-100'>
@@ -59,6 +54,8 @@ const LoginPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.username}
                     autoComplete='username'
+                    isInvalid={authFailed}
+                    autoFocus
                   />
                 </FloatingLabel>
 
@@ -70,14 +67,14 @@ const LoginPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                     autoComplete='new-password'
+                    isInvalid={authFailed}
                   />
+                  {authFailed && (
+                    <Form.Control.Feedback type='invalid' tooltip>
+                      Неверные имя пользователя или пароль
+                    </Form.Control.Feedback>
+                  )}
                 </FloatingLabel>
-
-                {formik.errors && (
-                  <Form.Control.Feedback type='invalid'>
-                    Неверные имя пользователя или пароль
-                  </Form.Control.Feedback>
-                )}
 
                 <Button variant='outline-primary' className='w-100 mb-3' type='submit'>
                   Войти
