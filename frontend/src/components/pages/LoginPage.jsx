@@ -1,8 +1,8 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useFormik } from 'formik';
 import { Button, Card, Col, Container, Form, FloatingLabel, Row } from 'react-bootstrap';
-import { Link, redirect } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { useAuth } from '../../contexts';
@@ -10,7 +10,10 @@ import routes from '../../routes';
 
 const LoginPage = () => {
   const [authFailed, setAuthFailed] = useState(false);
+  const inputRef = useRef();
   const { logIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().trim().required('Обязательное поле'),
@@ -23,16 +26,22 @@ const LoginPage = () => {
       password: '',
     },
     onSubmit: async (values) => {
+      setAuthFailed(false);
+
       try {
         const { data } = await axios.post(routes.login, values);
+        localStorage.setItem('userId', JSON.stringify(data));
         logIn();
-        localStorage.setItem('token', JSON.stringify(data.token));
-        setAuthFailed(false);
-        redirect('/');
+        const { from } = location.state;
+        navigate(from);
       } catch (error) {
         formik.setSubmitting(false);
-        setAuthFailed(true);
-        redirect('login');
+        if (error.isAxiosError && error.response.status === 401) {
+          setAuthFailed(true);
+          inputRef.current.select();
+          return;
+        }
+        throw error;
       }
     },
     validationSchema,
@@ -56,6 +65,7 @@ const LoginPage = () => {
                     autoComplete='username'
                     isInvalid={authFailed}
                     autoFocus
+                    ref={inputRef}
                   />
                 </FloatingLabel>
 
