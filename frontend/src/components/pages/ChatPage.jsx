@@ -23,10 +23,11 @@ const ChatPage = () => {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(routes.data, { headers: getAuthHeader() });
+      console.log('data', data);
       const { channels, messages, currentChannelId } = data || {};
 
       dispatch(channelsActions.addChannels(channels));
-      //dispatch(channelsActions.setCurrentChannel(currentChannelId));
+      dispatch(channelsActions.setCurrentChannel(currentChannelId));
       dispatch(messagesActions.addMessages(messages));
     }
     fetchData();
