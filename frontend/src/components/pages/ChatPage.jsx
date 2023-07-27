@@ -1,15 +1,19 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+
 import { useDispatch } from 'react-redux';
 
 import routes from '../../routes';
 import Channels from '../Channels';
+import MessageHeader from '../MessageHeader';
+import Messages from '../Messages';
+import MessageForm from '../MessageForm';
 import { actions as channelsActions } from '../../slices/channelsSlice';
 import { actions as messagesActions } from '../../slices/messagesSlice';
 
 const getAuthHeader = () => {
-  const userId = JSON.parse(localStorage.getItem('userId'));
+  const userId = JSON.parse(localStorage.getItem('user'));
 
   if (userId && userId.token) {
     return { Authorization: `Bearer ${userId.token}` };
@@ -23,7 +27,6 @@ const ChatPage = () => {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(routes.data, { headers: getAuthHeader() });
-      console.log('data', data);
       const { channels, messages, currentChannelId } = data || {};
 
       dispatch(channelsActions.addChannels(channels));
@@ -45,30 +48,9 @@ const ChatPage = () => {
         </div>
         <div className='col p-0 h-100'>
           <div className='d-flex flex-column h-100'>
-            <div className='bg-light mb-4 p-3 shadow-sm small'>
-              <p className='m-0'>
-                <b># random</b>
-              </p>
-              <span className='text-muted'>XXXX сообщений</span>
-            </div>
-            <div id='messages-box' className='chat-messages overflow-auto px-5 '></div>
-            <div className='mt-auto px-5 py-3'>
-              <Form noValidate className='py-1 border rounded-2'>
-                <Form.Control
-                  type='text'
-                  name='body'
-                  placeholder='Введите сообщение...'
-                  className='border-0 p-0 ps-2'
-                  // onChange={formik.handleChange}
-                  // value={formik.values.username}
-                  // autoComplete='username'
-                  // isInvalid={authFailed}
-                  // autoFocus
-                  // ref={inputRef}
-                />
-                <Button type='submit' className='btn btn-group-vertical'></Button>
-              </Form>
-            </div>
+            <MessageHeader />
+            <Messages />
+            <MessageForm />
           </div>
         </div>
       </div>
