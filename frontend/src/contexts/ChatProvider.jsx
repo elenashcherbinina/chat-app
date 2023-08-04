@@ -38,13 +38,19 @@ const ChatProvider = ({ socket, children }) => {
   const removeChannel = async (id) => {
     await socket.timeout(TIMEOUT_REQUEST).emit('removeChannel', { id });
     await socket.on('removeChannel', (payload) => {
-      console.log('payload', payload);
       dispatch(channelsActions.removeChannel(payload.id));
     });
   };
 
+  const renameChannel = async ({ id, name }) => {
+    await socket.timeout(TIMEOUT_REQUEST).emit('renameChannel', { id, name });
+    await socket.on('renameChannel', (payload) => {
+      dispatch(channelsActions.renameChannel(payload));
+    });
+  };
+
   return (
-    <ChatContext.Provider value={{ addMessage, addChannel, removeChannel }}>
+    <ChatContext.Provider value={{ addMessage, addChannel, removeChannel, renameChannel }}>
       {children}
     </ChatContext.Provider>
   );

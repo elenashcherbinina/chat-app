@@ -12,7 +12,7 @@ const Channel = ({ channel, showModal }) => {
   const { setCurrentChannel } = actions;
   const { t } = useTranslation();
 
-  const variant = channel.id === currentChannelId ? 'secondary' : 'light';
+  const variant = channel.id === currentChannelId ? 'ç' : 'default';
 
   return (
     <li className='nav-item w-100'>

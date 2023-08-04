@@ -15,6 +15,7 @@ const ruLocales = {
       channels: 'Каналы',
       channelName: 'Имя канала',
       removeChannel: 'Удалить канал',
+      renameChannel: 'Переименовать канал',
       login: 'Войти',
     },
     errors: {
