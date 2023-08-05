@@ -8,6 +8,7 @@ import { actions as channelsActions } from '../slices/channelsSlice';
 import { getCurrentChannelId } from '../slices/selectors';
 
 const TIMEOUT_REQUEST = 5000;
+const DEFAULT_CHANNEL = 1;
 
 const ChatProvider = ({ socket, children }) => {
   const currentChannelId = useSelector(getCurrentChannelId);
@@ -39,6 +40,9 @@ const ChatProvider = ({ socket, children }) => {
     await socket.timeout(TIMEOUT_REQUEST).emit('removeChannel', { id });
     await socket.on('removeChannel', (payload) => {
       dispatch(channelsActions.removeChannel(payload.id));
+      if (payload.id === currentChannelId) {
+        dispatch(channelsActions.setCurrentChannel(DEFAULT_CHANNEL));
+      }
     });
   };
 

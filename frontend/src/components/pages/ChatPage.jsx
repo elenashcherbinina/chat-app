@@ -6,9 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import routes from '../../routes';
 import Channels from '../Channels';
-import MessageHeader from '../MessageHeader';
 import Messages from '../Messages';
-import MessageForm from '../MessageForm';
 import { actions as channelsActions } from '../../slices/channelsSlice';
 import { actions as messagesActions } from '../../slices/messagesSlice';
 
