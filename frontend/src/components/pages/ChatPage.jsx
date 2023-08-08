@@ -9,18 +9,11 @@ import Channels from '../Channels';
 import Messages from '../Messages';
 import { actions as channelsActions } from '../../slices/channelsSlice';
 import { actions as messagesActions } from '../../slices/messagesSlice';
-
-const getAuthHeader = () => {
-  const userId = JSON.parse(localStorage.getItem('user'));
-
-  if (userId && userId.token) {
-    return { Authorization: `Bearer ${userId.token}` };
-  }
-  return {};
-};
+import { useAuth } from '../../contexts';
 
 const ChatPage = () => {
   const dispatch = useDispatch();
+  const { getAuthHeader } = useAuth();
 
   useEffect(() => {
     async function fetchData() {

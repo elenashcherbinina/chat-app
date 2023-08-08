@@ -1,22 +1,22 @@
-import axios from 'axios';
 import React, { useState, useRef } from 'react';
 import { useFormik } from 'formik';
-import { Button, Card, Col, Container, Form, FloatingLabel, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, FloatingLabel, Image, Row } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 import { useAuth } from '../../contexts';
 import routes from '../../routes';
 
 const LoginPage = () => {
   const { t } = useTranslation();
-
-  const [authFailed, setAuthFailed] = useState(false);
   const inputRef = useRef();
   const { logIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [authFailed, setAuthFailed] = useState(false);
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().trim().required(t('errors.required')),
@@ -33,9 +33,8 @@ const LoginPage = () => {
 
       try {
         const { data } = await axios.post(routes.login, values);
-        localStorage.setItem('user', JSON.stringify(data));
-        logIn();
-        const { from } = location.state;
+        logIn(data);
+        const { from } = location.state || { from: { pathname: '/' } };
         navigate(from);
       } catch (error) {
         setSubmitting(false);
@@ -56,9 +55,16 @@ const LoginPage = () => {
         <Col className='col-sm-4'>
           <Card className='shadow-sm'>
             <Card.Body className='row p-5'>
+              <Col xs={12} md={6} className='d-flex align-items-center justify-content-center'>
+                <Image src='src/images/avatar.login.jpg' roundedCircle alt={t('headers.login')} />
+              </Col>
               <Form onSubmit={formik.handleSubmit}>
                 <h1 className='text-center mb-4 h3'>{t('headers.login')}</h1>
-                <FloatingLabel controlId='username' label='Ваш ник' className='mb-3'>
+                <FloatingLabel
+                  controlId='username'
+                  label={t('placeholders.username')}
+                  className='mb-3'
+                >
                   <Form.Control
                     type='text'
                     name='username'
@@ -73,7 +79,11 @@ const LoginPage = () => {
                   />
                 </FloatingLabel>
 
-                <FloatingLabel controlId='password' label='Пароль' className='mb-3'>
+                <FloatingLabel
+                  controlId='password'
+                  label={t('placeholders.password')}
+                  className='mb-3'
+                >
                   <Form.Control
                     type='password'
                     name='password'
@@ -98,7 +108,7 @@ const LoginPage = () => {
             <Card.Footer className='p-4'>
               <div className='text-center'>
                 <span>{t('messages.noAccount')}</span>{' '}
-                <Link to='/signup'>{t('buttons.signup')}</Link>
+                <Link to='/signup'>{t('messages.signup')}</Link>
               </div>
             </Card.Footer>
           </Card>
