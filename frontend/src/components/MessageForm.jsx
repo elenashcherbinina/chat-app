@@ -40,7 +40,7 @@ const MessageForm = (currentChannelId) => {
 
   return (
     <div className='mt-auto px-5 py-3'>
-      <Form noValidate onSubmit={formik.handleSubmit} className='py-1 border rounded-2'>
+      <Form noValidate onSubmit={formik.handleSubmit} className='py-1 border rounded-3'>
         <InputGroup>
           <Form.Control
             type='text'
@@ -53,10 +53,10 @@ const MessageForm = (currentChannelId) => {
             autoFocus
           />
           <Button
-            variant='outline-primary'
+            variant='group-vertical'
             type='submit'
-            className='btn btn-group-vertical'
-            disabled={formik.isSubmitting}
+            className='border-0'
+            disabled={formik.isSubmitting || formik.values.message.length === 0}
           >
             <svg
               version='1.1'

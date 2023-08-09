@@ -1,0 +1,10 @@
+// @import '../node_modules/bootstrap/scss/variables';
+// @import '../node_modules/bootstrap/scss//functions';
+
+$cyan: #a3d1da;
+$grey: #e0e0e0;
+
+$info: $cyan;
+$secondary: $grey;
+
+@import 'bootstrap/scss/bootstrap.scss';
