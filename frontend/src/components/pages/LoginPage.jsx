@@ -2,9 +2,10 @@ import React, { useState, useRef } from 'react';
 import { useFormik } from 'formik';
 import { Button, Card, Col, Container, Form, FloatingLabel, Image, Row } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import axios from 'axios';
+import * as Yup from 'yup';
 
 import { useAuth } from '../../contexts';
 import routes from '../../routes';
@@ -44,7 +45,7 @@ const LoginPage = () => {
           inputRef.current.select();
           return;
         }
-        throw error;
+        toast.error(t('errors.netWorkError'));
       }
     },
     validationSchema,
