@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Col } from 'react-bootstrap';
 
@@ -12,6 +12,13 @@ const Messages = () => {
   const currentChannelId = useSelector(getCurrentChannelId);
   const messages = useSelector(getMessages);
   const channelMessages = messages.filter(({ channelId }) => channelId === currentChannelId);
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }, [messages]);
 
   return (
     <Col className='p-0 h-100'>
@@ -21,8 +28,9 @@ const Messages = () => {
           {channelMessages.map((message) => {
             return <Message key={message.id} message={message} />;
           })}
+          <span ref={messagesEndRef} />
         </div>
-        <MessageForm currentChannelId={currentChannelId}/>
+        <MessageForm currentChannelId={currentChannelId} />
       </div>
     </Col>
   );

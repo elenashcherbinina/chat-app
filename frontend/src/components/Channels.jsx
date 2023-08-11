@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -10,12 +10,16 @@ import renderModal from './modals/Modal';
 const Channels = () => {
   const channels = useSelector(getAllChannels);
   const { t } = useTranslation();
+  const channelsEndRef = useRef(null);
+
+  useEffect(() => {
+    channelsEndRef.current?.scrollIntoView();
+  }, [channels]);
 
   const initialModal = {
     type: null,
     channel: null,
   };
-
   const [modalInfo, setModalInfo] = useState(initialModal);
 
   const showModal = (type, channel = null) => {
@@ -60,6 +64,7 @@ const Channels = () => {
         {channels.map((channel) => {
           return <Channel key={channel.id} channel={channel} showModal={showModal} />;
         })}
+        <span ref={channelsEndRef} />
       </ul>
       {renderModal(modalInfo, hideModal, channels)}
     </Col>

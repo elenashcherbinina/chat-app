@@ -1,4 +1,4 @@
-import { current, createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import { actions as channelActions } from './channelsSlice';
 
 const messagesAdapter = createEntityAdapter();

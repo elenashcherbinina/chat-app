@@ -4,4 +4,4 @@
 
 ## Demo:
 
-React-Chat-App on: <a href="https://chat-app-k0vc.onrender.com" target="_blank">Render</a>
+React-Chat-App on: <a href="https://hexlet-chat-tg0o.onrender.com" target="_blank">Render</a>

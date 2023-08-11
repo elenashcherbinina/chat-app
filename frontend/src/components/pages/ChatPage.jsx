@@ -25,7 +25,7 @@ const ChatPage = () => {
       dispatch(messagesActions.addMessages(messages));
     }
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, getAuthHeader]);
 
   return (
     <Container className='h-100 my-4 overflow-hidden rounded shadow'>
