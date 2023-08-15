@@ -14,18 +14,20 @@ import { useAuth } from '../../contexts';
 const ChatPage = () => {
   const dispatch = useDispatch();
   const { getAuthHeader } = useAuth();
+  const headers = getAuthHeader();
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await axios.get(routes.data, { headers: getAuthHeader() });
+      const { data } = await axios.get(routes.data, { headers });
       const { channels, messages, currentChannelId } = data || {};
+      console.log('currentChannelId', currentChannelId);
 
       dispatch(channelsActions.addChannels(channels));
       dispatch(channelsActions.setCurrentChannel(currentChannelId));
       dispatch(messagesActions.addMessages(messages));
     }
     fetchData();
-  }, [dispatch, getAuthHeader]);
+  }, [dispatch, headers]);
 
   return (
     <Container className='h-100 my-4 overflow-hidden rounded shadow'>

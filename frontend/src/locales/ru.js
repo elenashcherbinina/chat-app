@@ -23,12 +23,12 @@ const ruLocales = {
     errors: {
       loginValidation: 'Неверные имя пользователя или пароль',
       length: 'От 3 до 20 символов',
-      passwordLength: 'Не менее 6 символов',
-      passwordConfirmation: 'Пароли должны совпадать',
       netWorkError: 'Ошибка соединения',
       notOneOf: 'Должно быть уникальным',
-      userExists: 'Такой пользователь уже существует',
+      passwordLength: 'Не менее 6 символов',
+      passwordConfirmation: 'Пароли должны совпадать',
       required: 'Обязательное поле',
+      userExists: 'Такой пользователь уже существует',
     },
     messages: {
       counter: {
@@ -51,6 +51,8 @@ const ruLocales = {
       channelAdded: 'Канал создан',
       channelRenamed: 'Канал переименован',
       channelRemoved: 'Канал удален',
+      onConnect: 'Cвязь с сервером установлена',
+      onDisconnect: 'связь с сервером потеряна',
     },
   },
 };
