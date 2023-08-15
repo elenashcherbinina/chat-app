@@ -20,7 +20,6 @@ const ChatPage = () => {
     async function fetchData() {
       const { data } = await axios.get(routes.data, { headers });
       const { channels, messages, currentChannelId } = data || {};
-      console.log('currentChannelId', currentChannelId);
 
       dispatch(channelsActions.addChannels(channels));
       dispatch(channelsActions.setCurrentChannel(currentChannelId));

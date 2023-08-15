@@ -12,13 +12,11 @@ const Header = () => {
     <Navbar expand='lg' className='shadow-sm bg-white'>
       <Container>
         <Navbar.Brand href='/'>{t('headers.title')}</Navbar.Brand>
-        <Navbar.Collapse className='justify-content-end'>
-          {user && (
-            <Button variant='info' onClick={logOut}>
-              {t('buttons.logout')}
-            </Button>
-          )}
-        </Navbar.Collapse>
+        {user && (
+          <Button variant='info' onClick={logOut}>
+            {t('buttons.logout')}
+          </Button>
+        )}
       </Container>
     </Navbar>
   );

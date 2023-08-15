@@ -23,7 +23,6 @@ const ChatProvider = ({ socket, children }) => {
   };
 
   const addChannel = async (channel) => {
-    console.log('channel', channel);
     await socket.timeout(TIMEOUT_REQUEST).emit('newChannel', channel);
   };
 
