@@ -3,6 +3,7 @@ import { Button, Card, Container, Col, FloatingLabel, Form, Image, Row } from 'r
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import { useRollbar } from '@rollbar/react';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -12,10 +13,11 @@ import routes from '../../routes';
 import signupImage from '../../images/avatar.signup.jpg';
 
 const SignUpPage = () => {
+  const { logIn } = useAuth();
   const { t } = useTranslation();
   const inputRef = useRef();
   const navigate = useNavigate();
-  const { signUp } = useAuth();
+  const rollbar = useRollbar();
 
   const [authFailed, setAuthFailed] = useState(false);
 
@@ -41,8 +43,8 @@ const SignUpPage = () => {
     onSubmit: async (values, { setSubmitting }) => {
       try {
         const { data } = await axios.post(routes.signupApi, values);
-        signUp(data);
-        navigate(routes.signupPage);
+        logIn(data);
+        navigate(routes.rootPage);
       } catch (error) {
         setSubmitting(false);
         if (error.isAxiosError && error.response.status === 409) {
@@ -51,6 +53,7 @@ const SignUpPage = () => {
           return;
         }
         toast.error(t('errors.netWorkError'));
+        rollbar.error('Signup', error.message);
       }
     },
     validationSchema,

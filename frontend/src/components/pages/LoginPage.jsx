@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { Button, Card, Col, Container, Form, FloatingLabel, Image, Row } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useRollbar } from '@rollbar/react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import * as Yup from 'yup';
@@ -12,11 +13,12 @@ import routes from '../../routes';
 import loginImage from '../../images/avatar.login.jpg';
 
 const LoginPage = () => {
+  const { logIn } = useAuth();
   const { t } = useTranslation();
   const inputRef = useRef();
-  const { logIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const rollbar = useRollbar();
 
   const [authFailed, setAuthFailed] = useState(false);
 
@@ -46,6 +48,7 @@ const LoginPage = () => {
           return;
         }
         toast.error(t('errors.netWorkError'));
+        rollbar.error('Authentication', error.message);
       }
     },
     validationSchema,

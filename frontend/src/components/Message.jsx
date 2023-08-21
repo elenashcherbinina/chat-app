@@ -1,11 +1,9 @@
 import React from 'react';
 import { useAuth } from '../contexts';
-import cn from 'classnames';
 
 const Message = ({ message }) => {
-  const { getUserName } = useAuth();
-  const currentUser = getUserName();
-  const isCurrentUser = message.user === currentUser;
+  const { user } = useAuth();
+  const isCurrentUser = message.username === user.username;
 
   return (
     <div className={`d-flex mb-2 justify-content-${isCurrentUser ? 'end' : 'start'}`}>
@@ -17,7 +15,7 @@ const Message = ({ message }) => {
         >
           {' '}
           <b>
-            {message.user}
+            {message.username}
             {': '}
           </b>
           {message.text}

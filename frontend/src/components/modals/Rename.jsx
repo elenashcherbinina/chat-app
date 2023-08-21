@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import { useRollbar } from '@rollbar/react';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import * as leoProfanity from 'leo-profanity';
@@ -11,10 +12,10 @@ import { useChatContext } from '../../contexts';
 const Rename = ({ modalInfo, hideModal, channels }) => {
   const { renameChannel } = useChatContext();
   const { channel } = modalInfo;
-  const channelsNames = channels.map((channel) => channel.name);
-
-  const inputRef = useRef(null);
   const { t } = useTranslation();
+  const inputRef = useRef(null);
+  const rollbar = useRollbar();
+  const channelsNames = channels.map((channel) => channel.name);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -42,7 +43,7 @@ const Rename = ({ modalInfo, hideModal, channels }) => {
       } catch (error) {
         setSubmitting(false);
         toast.error(t('errors.netWorkError'));
-        console.error(error.message);
+        rollbar.error('RenameChannel', error.message);
       }
     },
     validationSchema,
