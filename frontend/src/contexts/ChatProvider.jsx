@@ -1,16 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ChatContext } from '.';
 import { useAuth } from '.';
 import { getCurrentChannelId } from '../slices/selectors';
+import { actions as channelsActions } from '../slices/channelsSlice';
 
 const TIMEOUT_REQUEST = 5000;
 
 const ChatProvider = ({ socket, children }) => {
+  const dispatch = useDispatch();
   const currentChannelId = useSelector(getCurrentChannelId);
   const { getUserName } = useAuth();
-
   const username = getUserName();
 
   const addMessage = async ({ message }) => {
@@ -23,7 +24,8 @@ const ChatProvider = ({ socket, children }) => {
   };
 
   const addChannel = async (channel) => {
-    await socket.timeout(TIMEOUT_REQUEST).emit('newChannel', channel);
+    const { data } = await socket.timeout(TIMEOUT_REQUEST).emitWithAck('newChannel', channel);
+    dispatch(channelsActions.setCurrentChannel(data.id));
   };
 
   const removeChannel = async (id) => {

@@ -1,9 +1,13 @@
 const apiPath = '/api/v1';
 
 const routes = {
-  data: [apiPath, 'data'].join('/'),
-  login: [apiPath, 'login'].join('/'),
-  signup: [apiPath, 'signup'].join('/'),
+  dataApi: [apiPath, 'data'].join('/'),
+  loginApi: [apiPath, 'login'].join('/'),
+  signupApi: [apiPath, 'signup'].join('/'),
+  rootPage: '/',
+  loginPage: '/login',
+  signupPage: '/signup',
+  notFound: '*',
 };
 
 export default routes;

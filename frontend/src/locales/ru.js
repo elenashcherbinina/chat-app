@@ -48,11 +48,12 @@ const ruLocales = {
       username: 'Ваш ник',
     },
     toastify: {
+      authError: 'Ошибка авторизации',
       channelAdded: 'Канал создан',
       channelRenamed: 'Канал переименован',
       channelRemoved: 'Канал удален',
       onConnect: 'Cвязь с сервером установлена',
-      onDisconnect: 'связь с сервером потеряна',
+      onDisconnect: 'Cвязь с сервером потеряна',
     },
   },
 };

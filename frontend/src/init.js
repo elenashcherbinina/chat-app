@@ -30,7 +30,6 @@ const initApp = async (socket) => {
 
   socket.on('newChannel', (payload) => {
     store.dispatch(channelsActions.addChannel(payload));
-    store.dispatch(channelsActions.setCurrentChannel(payload.id));
   });
 
   socket.on('removeChannel', (payload) =>
