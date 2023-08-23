@@ -22,3 +22,7 @@ code {
 a {
   color: #168ea9;
 }
+
+.message {
+  width: fit-content;
+}
