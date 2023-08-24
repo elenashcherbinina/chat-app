@@ -54,7 +54,6 @@ const Rename = ({ modalInfo, hideModal, channels }) => {
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
-            <Form.Label className='visually-hidden'>{t('headers.channelName')}</Form.Label>
             <Form.Control
               id='name'
               name='name'
@@ -66,6 +65,9 @@ const Rename = ({ modalInfo, hideModal, channels }) => {
               disabled={formik.isSubmitting}
               isInvalid={formik.touched.name && formik.errors.name}
             />
+            <Form.Label className='visually-hidden' htmlFor='name'>
+              {t('headers.channelName')}
+            </Form.Label>
             <Form.Control.Feedback type='invalid'>{formik.errors.name}</Form.Control.Feedback>
           </Form.Group>
 
