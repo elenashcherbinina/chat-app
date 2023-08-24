@@ -15,19 +15,19 @@ const Channel = ({ channel, showModal }) => {
   const variant = channel.id === currentChannelId ? 'info' : 'default';
 
   return (
-    <li className='nav-item w-100'>
-      <Dropdown as={ButtonGroup} className='d-flex'>
+    <li className="nav-item w-100">
+      <Dropdown as={ButtonGroup} className="d-flex">
         <Button
           variant={variant}
           onClick={() => dispatch(setCurrentChannel(channel.id))}
-          className='w-100 text-start text-truncate'
+          className="w-100 text-start text-truncate"
         >
           {`# ${channel.name}`}
         </Button>
         {channel.removable ? (
           <>
-            <Dropdown.Toggle variant={variant} split className='border-0'>
-              <span className='visually-hidden'>{t('buttons.channelActions')}</span>
+            <Dropdown.Toggle variant={variant} split className="border-0">
+              <span className="visually-hidden">{t('buttons.channelActions')}</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => showModal('removing', channel)}>

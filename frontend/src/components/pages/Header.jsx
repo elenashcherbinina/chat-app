@@ -11,13 +11,13 @@ const Header = () => {
   const { t } = useTranslation();
 
   return (
-    <Navbar expand='lg' className='shadow-sm bg-white'>
+    <Navbar expand="lg" className="shadow-sm bg-white">
       <Container>
         <Navbar.Brand as={Link} to={routes.rootPage}>
           {t('headers.title')}
         </Navbar.Brand>
         {user && (
-          <Button variant='info' onClick={logOut}>
+          <Button variant="info" onClick={logOut}>
             {t('buttons.logout')}
           </Button>
         )}

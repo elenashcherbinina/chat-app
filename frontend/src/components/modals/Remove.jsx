@@ -27,13 +27,13 @@ const Remove = ({ modalInfo, hideModal }) => {
         <Modal.Title>{t('headers.removeChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p className='lead'>{t('messages.removeWarning')}</p>
+        <p className="lead">{t('messages.removeWarning')}</p>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className='mb-3 gap-2 d-flex justify-content-end'>
-            <Button variant='secondary' onClick={hideModal}>
+          <Form.Group className="mb-3 gap-2 d-flex justify-content-end">
+            <Button variant="secondary" onClick={hideModal}>
               {t('buttons.canсel')}
             </Button>
-            <Button variant='danger' type='submit'>
+            <Button variant="danger" type="submit">
               {t('buttons.remove')}
             </Button>
           </Form.Group>

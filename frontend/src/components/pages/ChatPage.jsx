@@ -45,8 +45,8 @@ const ChatPage = () => {
   }, [dispatch, headers, logOut, navigate, t]);
 
   return (
-    <Container className='h-100 my-4 overflow-hidden rounded shadow'>
-      <Row className='h-100 bg-white flex-md-row'>
+    <Container className="h-100 my-4 overflow-hidden rounded shadow">
+      <Row className="h-100 bg-white flex-md-row">
         <Channels />
         <Messages />
       </Row>

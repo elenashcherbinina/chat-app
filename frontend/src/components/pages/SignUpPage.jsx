@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { Button, Card, Container, Col, FloatingLabel, Form, Image, Row } from 'react-bootstrap';
+import {
+  Button, Card, Container, Col, FloatingLabel, Form, Image, Row,
+} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -57,21 +59,21 @@ const SignUpPage = () => {
   });
 
   return (
-    <Container fluid className='h-100'>
-      <Row className='justify-content-center align-items-center h-100'>
+    <Container fluid className="h-100">
+      <Row className="justify-content-center align-items-center h-100">
         <Col xs={12} md={8} xxl={6}>
           <Card>
-            <Card.Body className='row p-5'>
-              <Col xs={12} md={6} className='d-flex align-items-center justify-content-center'>
+            <Card.Body className="row p-5">
+              <Col xs={12} md={6} className="d-flex align-items-center justify-content-center">
                 <Image src={signupImage} rounded alt={t('headers.signup')} />
               </Col>
-              <Form onSubmit={formik.handleSubmit} className='col-12 col-md-6 mt-3 mt-mb-0'>
-                <h1 className='text-center mb-4 h2'>{t('headers.signup')}</h1>
-                <FloatingLabel controlId='username' label={t('placeholders.user')} className='mb-3'>
+              <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
+                <h1 className="text-center mb-4 h2">{t('headers.signup')}</h1>
+                <FloatingLabel controlId="username" label={t('placeholders.user')} className="mb-3">
                   <Form.Control
-                    type='text'
-                    name='username'
-                    autoComplete='username'
+                    type="text"
+                    name="username"
+                    autoComplete="username"
                     placeholder={t('placeholders.user')}
                     onChange={formik.handleChange}
                     value={formik.values.username}
@@ -81,23 +83,23 @@ const SignUpPage = () => {
                     ref={inputRef}
                   />
                   {authFailed ? (
-                    <Form.Control.Feedback type='invalid'></Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid" />
                   ) : (
-                    <Form.Control.Feedback type='invalid' tooltip>
+                    <Form.Control.Feedback type="invalid" tooltip>
                       {authFailed ? null : formik.errors.username}
                     </Form.Control.Feedback>
                   )}
                 </FloatingLabel>
 
                 <FloatingLabel
-                  controlId='password'
+                  controlId="password"
                   label={t('placeholders.password')}
-                  className='mb-3'
+                  className="mb-3"
                 >
                   <Form.Control
-                    type='password'
-                    name='password'
-                    autoComplete='new-password'
+                    type="password"
+                    name="password"
+                    autoComplete="new-password"
                     placeholder={t('placeholders.password')}
                     onChange={formik.handleChange}
                     value={formik.values.password}
@@ -105,37 +107,37 @@ const SignUpPage = () => {
                     disabled={formik.isSubmitting}
                   />
                   {authFailed ? (
-                    <Form.Control.Feedback type='invalid'></Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid" />
                   ) : (
-                    <Form.Control.Feedback type='invalid' tooltip>
+                    <Form.Control.Feedback type="invalid" tooltip>
                       {formik.errors.password}
                     </Form.Control.Feedback>
                   )}
                 </FloatingLabel>
 
                 <FloatingLabel
-                  controlId='passwordConfirmation'
+                  controlId="passwordConfirmation"
                   label={t('placeholders.passwordConfirmation')}
-                  className='mb-3'
+                  className="mb-3"
                 >
                   <Form.Control
-                    type='password'
-                    name='passwordConfirmation'
-                    autoComplete='new-password'
+                    type="password"
+                    name="passwordConfirmation"
+                    autoComplete="new-password"
                     placeholder={t('placeholders.passwordConfirmation')}
                     onChange={formik.handleChange}
                     value={formik.values.passwordConfirmation}
                     isInvalid={
-                      (formik.touched.passwordConfirmation && formik.errors.passwordConfirmation) ||
-                      authFailed
+                      (formik.touched.passwordConfirmation && formik.errors.passwordConfirmation)
+                      || authFailed
                     }
                     disabled={formik.isSubmitting}
                   />
-                  <Form.Control.Feedback type='invalid' tooltip>
+                  <Form.Control.Feedback type="invalid" tooltip>
                     {authFailed ? t('errors.userExists') : formik.errors.passwordConfirmation}
                   </Form.Control.Feedback>
                 </FloatingLabel>
-                <Button variant='outline-info' className='w-100 mb-3' type='submit'>
+                <Button variant="outline-info" className="w-100 mb-3" type="submit">
                   {t('buttons.signup')}
                 </Button>
               </Form>
