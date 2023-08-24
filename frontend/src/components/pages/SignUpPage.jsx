@@ -3,7 +3,6 @@ import { Button, Card, Container, Col, FloatingLabel, Form, Image, Row } from 'r
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { useRollbar } from '@rollbar/react';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -17,7 +16,6 @@ const SignUpPage = () => {
   const { t } = useTranslation();
   const inputRef = useRef();
   const navigate = useNavigate();
-  const rollbar = useRollbar();
 
   const [authFailed, setAuthFailed] = useState(false);
 
@@ -53,7 +51,6 @@ const SignUpPage = () => {
           return;
         }
         toast.error(t('errors.netWorkError'));
-        rollbar.error('Signup', error.message);
       }
     },
     validationSchema,

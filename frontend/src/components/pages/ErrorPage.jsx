@@ -1,18 +1,12 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useRouteError } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useRollbar } from '@rollbar/react';
 import { useTranslation } from 'react-i18next';
 
 import routes from '../../routes';
 
 export default function ErrorPage() {
   const { t } = useTranslation();
-  const rollbar = useRollbar();
-  const error = useRouteError();
-
-  rollbar.error('Page not found', error);
 
   return (
     <Container fluid className='h-100'>

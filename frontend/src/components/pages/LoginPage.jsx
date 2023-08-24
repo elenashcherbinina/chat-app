@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import { Button, Card, Col, Container, Form, FloatingLabel, Image, Row } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useRollbar } from '@rollbar/react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import * as Yup from 'yup';
@@ -18,7 +17,6 @@ const LoginPage = () => {
   const inputRef = useRef();
   const navigate = useNavigate();
   const location = useLocation();
-  const rollbar = useRollbar();
 
   const [authFailed, setAuthFailed] = useState(false);
 
@@ -38,7 +36,7 @@ const LoginPage = () => {
       try {
         const { data } = await axios.post(routes.loginApi, values);
         logIn(data);
-        const { from } = location.state || { from: { pathname: '/' } };
+        const { from } = location.state || { from: { pathname: routes.rootPage } };
         navigate(from);
       } catch (error) {
         setSubmitting(false);
@@ -48,7 +46,6 @@ const LoginPage = () => {
           return;
         }
         toast.error(t('errors.netWorkError'));
-        rollbar.error('Authentication', error.message);
       }
     },
     validationSchema,
@@ -113,7 +110,7 @@ const LoginPage = () => {
             <Card.Footer className='p-4'>
               <div className='text-center'>
                 <span>{t('messages.noAccount')}</span>{' '}
-                <Link to='/signup'>{t('messages.signup')}</Link>
+                <Link to={routes.signupPage}>{t('messages.signup')}</Link>
               </div>
             </Card.Footer>
           </Card>

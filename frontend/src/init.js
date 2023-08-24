@@ -13,7 +13,8 @@ import { actions as channelsActions } from './slices/channelsSlice';
 
 const initApp = async (socket) => {
   const rollbarConfig = {
-    accessToken: 'POST_CLIENT_ITEM_ACCESS_TOKEN',
+    accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
+    enabled: process.env.NODE_ENV === 'production',
     captureUncaught: true,
     captureUnhandledRejections: true,
     environment: 'production',

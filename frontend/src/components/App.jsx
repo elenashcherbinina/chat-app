@@ -21,7 +21,7 @@ import routes from '../routes';
 const Root = ({ children }) => {
   const { user } = useAuth();
   const location = useLocation();
-  return user ? children : <Navigate to='/login' state={{ from: location }} />;
+  return user ? children : <Navigate to={routes.loginPage} state={{ from: location }} />;
 };
 
 const router = createBrowserRouter(
@@ -37,7 +37,7 @@ const router = createBrowserRouter(
       />
       <Route path={routes.loginPage} element={<LoginPage />} />
       <Route path={routes.signupPage} element={<SignUpPage />} />
-      <Route path={routes.notFound} element={<ErrorPage />} />
+      <Route path='*' element={<ErrorPage />} />
     </Route>,
   ),
 );

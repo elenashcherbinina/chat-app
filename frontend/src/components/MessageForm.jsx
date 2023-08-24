@@ -48,6 +48,7 @@ const MessageForm = (currentChannelId) => {
           <Form.Control
             type='text'
             name='message'
+            aria-label={t('headers.newMessage')}
             placeholder={t('placeholders.sendMessage')}
             className='border-0 p-0 ps-2'
             onChange={formik.handleChange}
