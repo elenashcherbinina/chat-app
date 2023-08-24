@@ -29,20 +29,20 @@ const router = createBrowserRouter(
     <Route path={routes.rootPage} element={<Layout />}>
       <Route
         index
-        element={
+        element={(
           <Root>
             <ChatPage />
           </Root>
-        }
+        )}
       />
       <Route path={routes.loginPage} element={<LoginPage />} />
       <Route path={routes.signupPage} element={<SignUpPage />} />
-      <Route path='*' element={<ErrorPage />} />
+      <Route path="*" element={<ErrorPage />} />
     </Route>,
   ),
 );
 
-const App = () => {
+const App = () => { 
   return (
     <>
       <div className='d-flex flex-column h-100'>
@@ -62,6 +62,6 @@ const App = () => {
       />
     </>
   );
-};
+}
 
 export default App;
