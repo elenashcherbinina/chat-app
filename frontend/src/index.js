@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { io } from 'socket.io-client';
 
 import store from './slices/store';
-import initApp from './init';
+import initApp from './init.js';
 
 const app = async () => {
   const socket = io();
