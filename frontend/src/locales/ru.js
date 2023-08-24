@@ -55,7 +55,7 @@ const ruLocales = {
       authError: 'Ошибка авторизации',
       channelAdded: 'Канал создан',
       channelRenamed: 'Канал переименован',
-      channelRemoved: 'Канал удален',
+      channelRemoved: 'Канал удалён',
       onConnect: 'Cвязь с сервером установлена',
       onDisconnect: 'Cвязь с сервером потеряна',
     },
