@@ -42,26 +42,24 @@ const router = createBrowserRouter(
   ),
 );
 
-const App = () => { 
-  return (
-    <>
-      <div className='d-flex flex-column h-100'>
-        <RouterProvider router={router} />
-      </div>
-      <ToastContainer
-        position='top-right'
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme='light'
-      />
-    </>
-  );
-}
+const App = () => (
+  <>
+    <div className="d-flex flex-column h-100">
+      <RouterProvider router={router} />
+    </div>
+    <ToastContainer
+      position="top-right"
+      autoClose={2000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
+  </>
+);
 
 export default App;
