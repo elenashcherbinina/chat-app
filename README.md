@@ -26,7 +26,7 @@ node.js 16.0+
 Clone the repository:
 
 ```
-git clone git@github.com:elenashcherbinina/frontend-project-12.git
+git clone git@github.com:elenashcherbinina/chat-app.git
 ```
 
 Install the dependencies:
